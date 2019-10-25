@@ -20,4 +20,7 @@ include/mpdf/tmp
 nbproject/
 
 # Ignore deployment web directory
- public/
+public/
+
+# Ignore code editor specifc files
+.idea/*
