@@ -44,7 +44,15 @@ if($ost->isUpgradePending()) {
             die($sysnotice);
 
     } elseif(file_exists('../setup/')) {
-        $sysnotice=__('Please take a minute to delete <strong>setup/install</strong> directory (../setup/) for security reasons.');
+        $sysnotice=__('Please take a minute to delete <strong>setup</strong> directory (../setup/) for security reasons.');
+    } elseif(CONFIG_FILE && file_exists(CONFIG_FILE) && is_writable(CONFIG_FILE)) {
+            //Confirm for real that the file is writable by group or world.
+            clearstatcache(); //clear the cache!
+            $perms = @fileperms(CONFIG_FILE);
+            if(($perms & 0x0002) || ($perms & 0x0010)) {
+                $sysnotice=sprintf(__('Please change permission of config file (%1$s) to remove write access. e.g <i>chmod 644 %2$s</i>'),
+                                basename(CONFIG_FILE), basename(CONFIG_FILE));
+            }
     }
 
     if(!$sysnotice && ini_get('register_globals'))

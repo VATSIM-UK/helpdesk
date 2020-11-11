@@ -157,7 +157,7 @@ class Misc {
 
         // Make dt Immutable.
         $dt = DateTimeImmutable::createFromMutable($dt);
-        switch ($period) {
+	 switch ($period) {
             case 'td':
             case 'today':
                 $start = $end = $dt->modify('today');
@@ -230,7 +230,7 @@ class Misc {
     function currentURL() {
 
         $str = 'http';
-        if ($_SERVER['HTTPS'] == 'on') {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
             $str .='s';
         }
         $str .= '://';
