@@ -16,7 +16,7 @@ class StaffVatsimUKAuthentication extends StaffAuthenticationBackend {
         $URL = $config->get("helpdesk_url");
 
         // Let's login via SSO!
-        require_once "/srv/www/sharedResources/SSO.class.php";
+        require_once "/home/shared/shared.vatsim.uk/SSO.class.php";
         $SSO = new SSO(VATUK_AUTH_SCP_ID, VATUK_AUTH_SCP_SECRET, $URL."/scp/login.php");
         $SSO->authenticate();
         $member = $SSO->member;
